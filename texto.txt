@@ -1,0 +1,8 @@
+yarn create react-app 05-primeiro-projeto-react --template=typescript
+
+yarn start
+
+site react router dom
+
+yarn add react-router-dom
+yarn add @types/react-router-dom -D
