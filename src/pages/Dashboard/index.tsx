@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Title } from './styles';
+
 //function Dashboard() { }
 
 const Dashboard: React.FC = () => {
-  return <h1>Dashboard</h1>
+  return <Title>Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard</Title>
 }
 
 export default Dashboard;
