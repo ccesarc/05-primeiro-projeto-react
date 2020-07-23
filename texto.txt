@@ -25,3 +25,6 @@ yarn add polished
 
 //tratar de icones
 yarn add react-icons
+
+
+yarn add axios
