@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import api from '../../services/api';
-
+import { Link } from 'react-router-dom';
 import logoExplorer from '../../assets/img/github-explorer.svg.svg';
 
 import { Title, Form, Repositories, Error } from './styles';
@@ -81,12 +81,15 @@ const Dashboard: React.FC = () => {
           onChange={e => setNewRepo(e.target.value)}
           placeholder="Digite o nome do repositorio"
         />
-        <button type="submit"> Pesquisar</button>
+        <button type="submit"> Buscar </button>
       </Form>
       {inputError && <Error>{inputError}</Error>}
       <Repositories>
         {repositories.map(repository => (
-          <a key={repository.full_name} href="Teste">
+          <Link
+            key={repository.full_name}
+            to={`/repository/${repository.full_name}`}
+          >
             <img
               src={repository.owner.avatar_url}
               alt="{repository.full_name}"
@@ -96,7 +99,7 @@ const Dashboard: React.FC = () => {
               <p>{repository.description}</p>
             </div>
             <FiChevronRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repositories>
     </>
