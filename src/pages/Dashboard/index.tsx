@@ -2,7 +2,7 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
-import logoExplorer from '../../assets/img/github-explorer.svg.svg';
+import logoExplorer from '../../assets/img/github-explorer.svg';
 
 import { Title, Form, Repositories, Error } from './styles';
 
