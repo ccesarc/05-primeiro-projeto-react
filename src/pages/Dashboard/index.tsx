@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
-import api from "../../services/api"
+import api from '../../services/api';
 
 import logoExplorer from '../../assets/img/github-explorer.svg.svg';
 
@@ -22,22 +22,28 @@ const Dashboard: React.FC = () => {
   const [inputError, setInputError] = useState('');
   //const [repositories, serRepositories] = useState<Repository[]>([]);
   const [repositories, serRepositories] = useState<Repository[]>(() => {
-    const storeRespositories = localStorage.getItem('@GitHumProjeto:repositories');
+    const storeRespositories = localStorage.getItem(
+      '@GitHumProjeto:repositories',
+    );
 
     if (storeRespositories) {
       return JSON.parse(storeRespositories);
     } else {
       return [];
     }
-
   });
 
   //Sempre que tiver uma mudança em alguma variavel
   useEffect(() => {
-    localStorage.setItem('@GitHumProjeto:repositories', JSON.stringify(repositories))
-  }, [repositories])
+    localStorage.setItem(
+      '@GitHumProjeto:repositories',
+      JSON.stringify(repositories),
+    );
+  }, [repositories]);
 
-  async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleAddRepository(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
     event.preventDefault();
 
     if (!newRepo) {
@@ -49,13 +55,13 @@ const Dashboard: React.FC = () => {
       console.log('newRepo :', newRepo);
       //adição de um novo repository
       //consumir a api do github
-      const response = await api.get<Repository>(`repos/${newRepo}`)
+      const response = await api.get<Repository>(`repos/${newRepo}`);
 
-      const repository = response.data
+      const repository = response.data;
 
       console.log('repository :', repository);
 
-      serRepositories([...repositories, repository])
+      serRepositories([...repositories, repository]);
       setNewRepo('');
       setInputError('');
     } catch (error) {
@@ -69,19 +75,22 @@ const Dashboard: React.FC = () => {
 
       <Title>Dashboard Dashboard Dashboard </Title>
 
-      <Form hasError={!!inputError} onSubmit={handleAddRepository} >
+      <Form hasError={!!inputError} onSubmit={handleAddRepository}>
         <input
           value={newRepo}
           onChange={e => setNewRepo(e.target.value)}
           placeholder="Digite o nome do repositorio"
         />
-        <button type="submit" > Pesquisar</button>
+        <button type="submit"> Pesquisar</button>
       </Form>
       {inputError && <Error>{inputError}</Error>}
       <Repositories>
         {repositories.map(repository => (
           <a key={repository.full_name} href="Teste">
-            <img src={repository.owner.avatar_url} alt="{repository.full_name}" />
+            <img
+              src={repository.owner.avatar_url}
+              alt="{repository.full_name}"
+            />
             <div>
               <strong>{repository.full_name}</strong>
               <p>{repository.description}</p>
@@ -92,6 +101,6 @@ const Dashboard: React.FC = () => {
       </Repositories>
     </>
   );
-}
+};
 
 export default Dashboard;
